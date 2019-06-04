@@ -1,78 +1,97 @@
 @startuml
 left to right direction
+skinparam titleBorderRoundCorner 15
+skinparam titleBorderThickness 1
+skinparam titleBorderColor black
+skinparam titleBackgroundColor Aqua
+title Links flow diagram between applications
 
 'Objects
 [Links]
 
 'Packages
 package "Bookmarks Apps" {
-  [Links]-->[Refind] : saved in
-  [Links]-->[Tagpacker] : saved in
-  [Links]-->[Diigo] : saved in
+  [Links]-[#red]->[Refind Collections] : saved in
+  [Refind]-[#green]->[Links] : generate
+  [Refind]..>[Refind Collections]
+  [Tagpacker] #lightgrey
+  [Links]-[#red]->[Tagpacker] : saved in
+  note right of [Tagpacker] #lightgreen : removed
+  [Links]-[#red]->[Diigo] : saved in
+  interface "Add Link" as AL
+  AL - [Diigo]
 }
 package "Social Media Apps" {
-  [Twitter]-->[Links] : generate
-  [Reddit]-->[Links] : generate
+  [Twitter]-[#green]->[Links] : generate
+  [Reddit]-[#green]->[Links] : generate
   package "Facebook" {
-    [Facebook]-->[Links] : generate
-    [Links]-->[Facebook Saved] : saved in
+    [Facebook]-[#green]->[Links] : generate
+    [Links]-[#red]->[Facebook Saved] : saved in
+    
+    [Facebook]..>[Facebook Saved]
+    [Facebook Saved]-[#green,dotted]->[Diigo]
   }
   package "Pinterest" {
-    [Pinterest]-->[Links] : generate
-    [Links]-->[Pinterest Lists] : saved in
+    [Pinterest]-[#green]->[Links] : generate
+    [Links]-[#red]->[Pinterest Boards] : saved in
+    [Pinterest]..>[Pinterest Boards]
   }
 }
 package "Chat Apps" {
-  [WhatsApp]-->[Links] : generate
-  [Messenger]-->[Links] : generate
-  [Links]-->[Slack Channels] : saved in
+  [WhatsApp]-[#green]->[Links] : generate
+  [Messenger]-[#green]->[Links] : generate
+  [Links]-[#red]->[Slack Channels] : saved in
 }
 package "Media Apps" {
-  [Links]-->[YouTube Playlists] : saved in
-  [Shazam]-->[Links] : generate
-  [Google Podcasts]-->[Links] : generate
+  [YouTube]-[#green]->[Links] : generate
+  [Links]-[#red]->[YouTube Playlists] : saved in
+  [YouTube]..>[YouTube Playlists]
+  [Shazam]-[#green]->[Links] : generate
+  [Google Podcasts]-[#green]->[Links] : generate
   package "Sound Cloud" {
-    [Sound Cloud]-->[Links] : generate
-    [Links]-->[Sound Cloud Playlists] : saved in
+    [Sound Cloud]-[#green]->[Links] : generate
+    [Links]-[#red]->[Sound Cloud Playlists] : saved in
+    [Sound Cloud]..>[Sound Cloud Playlists]
   }
 }
 package "Note Taking Apps" {
-  [Links]-->[Notion] : saved in
-  [Links]-->[Evernote] : saved in
-  [Links]-->[1 Second Note] : saved in
-  [1 Second Note]-->[Evernote] : sync to
+  [Links]-[#red]->[Notion] : saved in
+  [Links]-[#red]->[Evernote] : saved in
+  [Links]-[#red]->[1 Second Note] : saved in
+  [1 Second Note]..>[Evernote] : sync to
 }
 package "Emails" {
-  [Links]-->[GMail] : saved in
-  [Links]-->[Outlook] : saved in
+  [Links]-[#red]->[GMail] : saved in
+  [Links]-[#red]->[Outlook] : saved in
 }
 package "Browsers" {
-  [Chrome Bookmarks] #Grey
-  [Session Buddy] #Grey
-  [Firefox Bookmarks] #Grey
-  [Links]-->[Chrome Bookmarks] : saved in
-  [Links]-->[Firefox Bookmarks] : saved in
-  [Links]-->[IE Bookmarks] : saved in
-  [Links]-->[Session Buddy] : saved in
+  [Chrome Bookmarks] #lightgrey
+  [Session Buddy] #lightgrey
+  [Firefox Bookmarks] #lightgrey
+  [Links]-[#red]->[Chrome Bookmarks] : saved in
+  [Links]-[#red]->[Firefox Bookmarks] : saved in
+  [Links]-[#red]->[IE Bookmarks] : saved in
+  [Links]-[#red]->[Session Buddy] : saved in
 }
 package "Stack Exchange" {
-  [Stack Exchange]-->[Links] : generate
-  [Links]-->[Stack Exchange Favorite] : saved in
+  [Stack Exchange]-[#green]->[Links] : generate
+  [Links]-[#red]->[Stack Exchange Favorite] : saved in
+  [Stack Exchange]..>[Stack Exchange Favorite]
 }
 package "Google Play" {
-  [Google Play]-->[Links] : generate
-  [Links]-->[Google Play Wishlist] : saved in
-  [Links]-->[Google Play Installed] : saved in
+  [Google Play]-[#green]->[Links] : generate
+  [Links]-[#red]->[Google Play Wishlist] : saved in
+  [Links]-[#red]->[Google Play Installed] : saved in
 }
 package "Github" {
-  [Github]-->[Links] : generate
-  [Links]-->[Github Starred] : saved in
+  [Github]-[#green]->[Links] : generate
+  [Links]-[#red]->[Github Starred] : saved in
   [Github]..>[Github Starred]
 }
 package "Other Apps" {
-  [Android Google]-->[Links] : generate
-  [Contacts+]-->[Links] : generate
-  [Links]-->[Maps] : saved in
-  [Links]-->[Passpack] : saved in
+  [Google Discover]-[#green]->[Links] : generate
+  [Contacts+]-[#green]->[Links] : generate
+  [Links]-[#red]->[Maps] : saved in
+  [Links]-[#red]->[Passpack] : saved in
 }
 @enduml
