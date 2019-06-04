@@ -1,0 +1,78 @@
+@startuml
+left to right direction
+
+'Objects
+[Links]
+
+'Packages
+package "Bookmarks Apps" {
+  [Links]-->[Refind] : saved in
+  [Links]-->[Tagpacker] : saved in
+  [Links]-->[Diigo] : saved in
+}
+package "Social Media Apps" {
+  [Twitter]-->[Links] : generate
+  [Reddit]-->[Links] : generate
+  package "Facebook" {
+    [Facebook]-->[Links] : generate
+    [Links]-->[Facebook Saved] : saved in
+  }
+  package "Pinterest" {
+    [Pinterest]-->[Links] : generate
+    [Links]-->[Pinterest Lists] : saved in
+  }
+}
+package "Chat Apps" {
+  [WhatsApp]-->[Links] : generate
+  [Messenger]-->[Links] : generate
+  [Links]-->[Slack Channels] : saved in
+}
+package "Media Apps" {
+  [Links]-->[YouTube Playlists] : saved in
+  [Shazam]-->[Links] : generate
+  [Google Podcasts]-->[Links] : generate
+  package "Sound Cloud" {
+    [Sound Cloud]-->[Links] : generate
+    [Links]-->[Sound Cloud Playlists] : saved in
+  }
+}
+package "Note Taking Apps" {
+  [Links]-->[Notion] : saved in
+  [Links]-->[Evernote] : saved in
+  [Links]-->[1 Second Note] : saved in
+  [1 Second Note]-->[Evernote] : sync to
+}
+package "Emails" {
+  [Links]-->[GMail] : saved in
+  [Links]-->[Outlook] : saved in
+}
+package "Browsers" {
+  [Chrome Bookmarks] #Grey
+  [Session Buddy] #Grey
+  [Firefox Bookmarks] #Grey
+  [Links]-->[Chrome Bookmarks] : saved in
+  [Links]-->[Firefox Bookmarks] : saved in
+  [Links]-->[IE Bookmarks] : saved in
+  [Links]-->[Session Buddy] : saved in
+}
+package "Stack Exchange" {
+  [Stack Exchange]-->[Links] : generate
+  [Links]-->[Stack Exchange Favorite] : saved in
+}
+package "Google Play" {
+  [Google Play]-->[Links] : generate
+  [Links]-->[Google Play Wishlist] : saved in
+  [Links]-->[Google Play Installed] : saved in
+}
+package "Github" {
+  [Github]-->[Links] : generate
+  [Links]-->[Github Starred] : saved in
+  [Github]..>[Github Starred]
+}
+package "Other Apps" {
+  [Android Google]-->[Links] : generate
+  [Contacts+]-->[Links] : generate
+  [Links]-->[Maps] : saved in
+  [Links]-->[Passpack] : saved in
+}
+@enduml
